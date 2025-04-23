@@ -1,14 +1,14 @@
-import { useRouter } from 'next/router';
-import { users } from '@/data/mockData';
+import { GetServerSideProps } from 'next';
+import { BASE_URL } from '@/data/mockData';
+import { User } from '@/data/types';
 import Profile from '@/components/Profile';
 import BackButton from '@/components/BackButton';
 
-const ProfilePage = () => {
-  const router = useRouter();
-  const { id } = router.query;
+type ProfileDetailProps = {
+  user: User | null;
+};
 
-  const user = users.find((user) => user.id === id);
-
+const ProfileDetail = ({ user }: ProfileDetailProps) => {
   if (!user) return <p>User not found!</p>;
 
   return (
@@ -19,4 +19,33 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { id } = context.params || {};
+
+  try {
+    const res = await fetch(`${BASE_URL}/api/users/${id}`);
+
+    if (!res.ok) {
+      return {
+        notFound: true,
+      };
+    }
+
+    const user = await res.json();
+
+    return {
+      props: {
+        user,
+      },
+    };
+  } catch (error: unknown) {
+    console.error('Error fetching user due to unknown reason:', error);
+    return {
+      props: {
+        user: null,
+      },
+    };
+  }
+};
+
+export default ProfileDetail;

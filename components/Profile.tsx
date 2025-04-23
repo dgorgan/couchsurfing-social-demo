@@ -1,17 +1,48 @@
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { User } from '@/data/types';
-import { posts, users } from '@/data/mockData';
 import Link from 'next/link';
+import { User, Post } from '@/data/types';
 
 type ProfileProps = {
   user: User;
 };
 
 const Profile = ({ user }: ProfileProps) => {
-  const userPosts = posts.filter((post) => post.authorId === user.id);
-  const userFriends = users.filter((friend) =>
-    user.friends.includes(friend.id)
-  );
+  const [userPosts, setUserPosts] = useState<Post[]>([]);
+  const [userFriends, setUserFriends] = useState<User[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [postsResponse, usersResponse] = await Promise.all([
+          fetch('/api/posts'),
+          fetch('/api/users'),
+        ]);
+
+        const postsData = await postsResponse.json();
+        const usersData = await usersResponse.json();
+
+        const userPostsData = postsData.filter(
+          (post: Post) => post.authorId === user.id
+        );
+        const userFriendsData = usersData.filter((friend: User) =>
+          user.friends.includes(friend.id)
+        );
+
+        setUserPosts(userPostsData);
+        setUserFriends(userFriendsData);
+        setLoading(false);
+      } catch (error: unknown) {
+        console.error('Error fetching data to due unknown reason: ', error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [user.id, user.friends]);
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <div className='bg-white shadow-lg rounded-xl p-8 mt-6'>
