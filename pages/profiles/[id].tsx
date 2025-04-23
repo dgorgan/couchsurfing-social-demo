@@ -1,6 +1,7 @@
-import { useRouter } from "next/router";
-import { users } from "@/data/mockData";
-import Profile from "@/components/Profile";
+import { useRouter } from 'next/router';
+import { users } from '@/data/mockData';
+import Profile from '@/components/Profile';
+import BackButton from '@/components/BackButton';
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -10,7 +11,12 @@ const ProfilePage = () => {
 
   if (!user) return <p>User not found!</p>;
 
-  return <Profile user={user} />;
+  return (
+    <>
+      <BackButton />
+      <Profile user={user} />
+    </>
+  );
 };
 
 export default ProfilePage;

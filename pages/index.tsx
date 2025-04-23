@@ -1,36 +1,17 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
-import PostsPage from "@/pages/posts";
+import Head from "next/head";
+import { posts } from "@/data/mockData";
+import PostList from "@/components/PostList";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export default function Home() {
+export default function HomeFeed() {
   return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          src="https://www.couchsurfing.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo-full.b9a1e2af.png&w=256&q=75"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-      <PostsPage />
-       Hello World
+    <>
+      <Head>
+        <title>Home Feed | Couchsurfing Local</title>
+      </Head>
+      <main className="p-6">
+        <h1 className="text-2xl font-bold mb-4">Home Feed</h1>
+        <PostList posts={posts} />
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        2025
-      </footer>
-    </div>
+    </>
   );
 }
