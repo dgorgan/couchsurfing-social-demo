@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
+import PostsPage from "@/pages/posts";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,6 +25,7 @@ export default function Home() {
           height={38}
           priority
         />
+      <PostsPage />
        Hello World
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
