@@ -16,7 +16,7 @@ A simple web app to browse a feed of posts, and view the individual posts and pr
 
    ```bash
    git clone https://github.com/dgorgan/couchsurfing-social-demo.git
-   cd couchsurfing-local-demo
+   cd couchsurfing-social-demo
    ```
 
 2. Install the dependencies:
