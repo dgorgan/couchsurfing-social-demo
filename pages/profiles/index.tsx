@@ -39,18 +39,23 @@ const ProfilesPage = () => {
   }
 
   return (
-    <div className='p-6 bg-white min-h-screen'>
-      <BackButton />
-      <h1 className='text-3xl font-bold'>User Profiles</h1>
-      <div className='mt-6 grid grid-cols-3 gap-6'>
-        {users.map((user) => (
-          <Link href={`/profiles/${user.id}`} key={user.id}>
-            <span className='flex flex-col items-center text-center cursor-pointer'>
-              <Avatar src={user.avatar} size={72} />
-              <p className='text-sm mt-2'>{user.name}</p>
-            </span>
-          </Link>
-        ))}
+    <div className='bg-gray-50 min-h-screen p-6'>
+      <div className='max-w-5xl mx-auto'>
+        <BackButton />
+
+        <h1 className='text-3xl font-bold text-gray-800 mt-6'>User Profiles</h1>
+        
+        <div className='mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8'>
+          {users.map((user) => (
+            <Link href={`/profiles/${user.id}`} key={user.id}>
+              <span className='flex flex-col items-center text-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg'>
+                <Avatar src={user.avatar} size={96} />
+                <p className='text-lg mt-4 font-semibold text-gray-700'>{user.name}</p>
+                <p className='text-sm text-gray-500'>{user.email}</p>
+              </span>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );

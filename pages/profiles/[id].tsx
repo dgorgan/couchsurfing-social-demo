@@ -2,7 +2,6 @@ import { GetServerSideProps } from 'next';
 import { BASE_URL } from '@/data/mockData';
 import { User } from '@/data/types';
 import Profile from '@/components/Profile';
-import BackButton from '@/components/BackButton';
 
 type ProfileDetailProps = {
   user: User | null;
@@ -11,12 +10,7 @@ type ProfileDetailProps = {
 const ProfileDetail = ({ user }: ProfileDetailProps) => {
   if (!user) return <p>User not found!</p>;
 
-  return (
-    <>
-      <BackButton />
-      <Profile user={user} />
-    </>
-  );
+  return <Profile user={user} />;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

@@ -12,24 +12,24 @@ type PostDetailProps = {
 };
 
 const PostDetail = ({ post }: PostDetailProps) => {
-  if (!post) return <p>Post not found!</p>;
+  if (!post) return <p className='text-center text-xl font-semibold mt-10'>Post not found!</p>;
 
   return (
-    <div className='p-6 bg-white min-h-screen'>
+    <div className='max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-8'>
       <BackButton />
-      <h1 className='text-3xl font-bold'>{post.title}</h1>
+      <h1 className='text-3xl font-bold text-gray-800 mt-4'>{post.title}</h1>
       <p className='text-gray-600 mt-4'>{post.body}</p>
 
-      <div className='mt-4'>
+      <div className='mt-6 p-4 bg-gray-50 rounded-lg'>
+        <h3 className='text-lg font-semibold text-gray-700'>Posted by</h3>
         <Link href={`/profiles/${post.author.id}`}>
-          <span className='text-sm text-blue-600 hover:underline'>
-            Posted by {post.author.name}
+          <span className='text-blue-600 hover:underline'>
+            <div className='flex items-center mt-2'>
+              <Avatar src={post.author.avatar} size={48} />
+              <p className='ml-3 text-lg font-medium text-gray-800'>{post.author.name}</p>
+            </div>
           </span>
         </Link>
-        <div className='flex items-center mt-2'>
-          <Avatar src={post.author.avatar} size={48} />
-          <p className='ml-2'>{post.author.name}</p>
-        </div>
       </div>
     </div>
   );
