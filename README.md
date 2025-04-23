@@ -1,12 +1,14 @@
-# Couchsurfing Local
+# Couchsurfing Social Web App
 
 A simple web app to browse a feed of posts, and view the individual posts and profiles of users who made the posts.
 
 ## Features
 
-- Browse the user feed and view individual posts
-- Explore user profiles and their details
-- Navigate from posts and profiles back to feed
+- Browse a feed of posts and see who they were written by
+- View individual posts along with detailed author information
+- Explore author profiles including their recent posts and friends
+- Easy navigation back to the feed from all pages
+- Navbar with a logo and a link to view all profiles in app
 
 ## Setup
 
