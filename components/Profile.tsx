@@ -74,12 +74,14 @@ const Profile = ({ user }: ProfileProps) => {
         <ul className='mt-4 space-y-4'>
           {userPosts.length > 0 ? (
             userPosts.map((post) => (
-              <li key={post.id} className='border-b pb-4'>
-                <h4 className='text-lg font-medium text-gray-900'>
-                  {post.title}
-                </h4>
-                <p className='text-gray-700 mt-1'>{post.body}</p>
-              </li>
+              <Link href={`/posts/${post.id}`} key={post.id} passHref>
+                <li className='border-b pb-4'>
+                  <h4 className='text-lg font-medium text-gray-900 hover:underline mt-4'>
+                    {post.title}
+                  </h4>
+                  <p className='text-gray-700 mt-1'>{post.body}</p>
+                </li>
+              </Link>
             ))
           ) : (
             <p className='text-gray-600'>
